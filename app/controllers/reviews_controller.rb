@@ -2,12 +2,11 @@ class ReviewsController < ApplicationController
   def create
     @movie = Movie.find(params[:movie_id])
     @review = @movie.reviews.build(review_params)
-    @review.user = current_user  # Assuming you have user authentication
 
     if @review.save
-      redirect_to @movie, notice: 'Review was successfully created.'
+      redirect_to movie_path(@review.movie.tmdb_id), notice: 'Review submitted successfully.'
     else
-      @reviews = @movie.reviews
+      flash.now[:alert] = "There was a problem submitting your review"
       render 'movies/show'
     end
   end
@@ -15,6 +14,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:comment, :rating)
+    params.require(:review).permit(:user_id, :comment, :rating)
   end
 end

@@ -6,7 +6,7 @@
       <div class="ml-8">
         <p class="text-lg"><%= @movie['overview'] %></p>
         <p class="mt-4 text-gray-700">Runtime: <%= @movie['runtime'] %> minutes</p>
-        <p class="mt-2 text-gray-700">Rating: <%= @movie['vote_average'].round(1) %></p>
+        <p class="mt-2 text-gray-700">Rating: <%= @movie['vote_average'] %></p>
         <p class="mt-2 text-gray-700">Status: <%= @movie['status'] %></p>
         <!-- Here you can add a form for users to submit reviews -->
       </div>
@@ -15,6 +15,42 @@
     <p>Movie details not found.</p>
   <% end %>
 
+  <!-- Review Form -->
+  <h2 class="text-2xl font-semibold mt-8 mb-4">Leave a Review</h2>
+
+  <%= form_with(model: [@movie, @review], local: true, class: "w-full max-w-lg") do |form| %>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="user_id">User ID</label>
+      <%= form.text_field :user_id, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="comment">Comment</label>
+      <%= form.text_area :comment, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows: 5 %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="rating">Rating</label>
+      <%= form.number_field :rating, in: 1..10, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", step: 1 %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit "Submit Review", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    </div>
+  <% end %>
+
+
+  <!-- Display Reviews -->
+  <h2 class="text-2xl font-semibold mt-6">Reviews</h2>
+  <div class="mt-4">
+    <% @reviews.each do |review| %>
+      <div class="mb-4 p-4 border rounded shadow">
+        <p class="font-bold">User ID: <%= review.user_id %></p>
+        <p><%= review.comment %></p>
+        <p class="font-semibold">Rating: <%= review.rating %></p>
+      </div>
+    <% end %>
+  </div>
   
 
 </div>
