@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  backdrop_path: MyString
+  original_title: MyString
+  overview: MyText
+  homepage: MyString
+  poster_path: MyString
+  runtime: 1
+  status: MyString
+  imdb_id: 1
+  tmdb_id: 1
+  vote_average: 1.5
+
+two:
+  backdrop_path: MyString
+  original_title: MyString
+  overview: MyText
+  homepage: MyString
+  poster_path: MyString
+  runtime: 1
+  status: MyString
+  imdb_id: 1
+  tmdb_id: 1
+  vote_average: 1.5
