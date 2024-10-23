@@ -12,8 +12,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "movies#index"
 
-  resources :movies, only: [:index, :show] do
-    resources :reviews, only: [:create]
+  namespace :api do
+    namespace :v1 do 
+      resources :movies, only: [:index, :show, :destroy]
+    end
+  end
+
+  resources :movies, only: [:index, :show, :destroy] do
+    resources :reviews, only: [:create, :destroy]
+
   end
   # resources: users
 end
